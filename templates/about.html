@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container mt-5">
+    <div class="row align-items-center">
+        <div class="col-md-7">
+            <h1 class="display-4 text-primary">About the Mission</h1>
+            <p class="lead">The Spaceship Titanic was a luxury interstellar liner carrying almost 13,000 passengers on its maiden voyage from Earth to three newly habitable exoplanets.</p>
+            
+            <hr class="my-4">
+            
+            <h4 class="text-secondary">Project Objective</h4>
+            <p>Using the latest advances in <b>Random Forest Classification</b>, this AI suite analyzes passenger spending patterns, cryogenic status, and cabin assignments to predict who was transported to an alternate dimension after the anomaly near 55 Cancri e.</p>
+            
+            <div class="alert alert-dark mt-4 shadow-sm border-0">
+                <h5><i class="bi bi-cpu"></i> Tech Stack</h5>
+                <ul class="mb-0">
+                    <li><b>Backend:</b> Python / Flask</li>
+                    <li><b>Model:</b> Scikit-Learn (Random Forest)</li>
+                    <li><b>Explainability:</b> SHAP (Shapley Additive Explanations)</li>
+                    <li><b>UI:</b> Bootstrap 5 & Jinja2 Templates</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="col-md-5 text-center">
+            <div class="card bg-primary text-white p-4 shadow-lg border-0" style="border-radius: 20px;">
+                <div class="card-body">
+                    <h1 style="font-size: 5rem;">🚀</h1>
+                    <h3>Project v2.0</h3>
+                    <p>Designed for high-accuracy interstellar passenger tracking.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

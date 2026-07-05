@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+    <h1>🚀 AI Prediction System</h1>
+    <div class="card">
+        <form action="/predict-page" method="POST">
+            <label>Age</label>
+            <input type="number" name="age" placeholder="Enter Age" required>
+            
+            <label>Total Spending</label>
+            <input type="number" name="spending" placeholder="Total Spending" required>
+
+            <label>CryoSleep</label>
+            <select name="cryosleep">
+                <option value="0">No</option>
+                <option value="1">Yes</option>
+            </select>
+
+            <label>VIP Status</label>
+            <select name="vip">
+                <option value="0">No</option>
+                <option value="1">Yes</option>
+            </select>
+
+            <br><button type="submit">🔍 Predict</button>
+        </form>
+
+        {% if prediction_text %}
+        <div class="result-box">
+            <h2>Result: {{ prediction_text }} {{ status_icon }}</h2>
+            <p>Confidence: {{ confidence }}</p>
+        </div>
+        {% endif %}
+
+        <hr>
+        <h3>Analysis History</h3>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Time</th>
+                    <th>Age</th>
+                    <th>Prediction</th>
+                    <th>Confidence</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in history|reverse %}
+                <tr>
+                    <td>{{ item.time }}</td>
+                    <td>{{ item.age }}</td>
+                    <td>{{ item.prediction }} {{ item.icon }}</td>
+                    <td>{{ item.confidence }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

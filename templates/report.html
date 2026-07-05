@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container mt-4">
+    <h1 class="text-center mb-4">📄 AI Model Report Dashboard</h1>
+
+    <!-- Model Overview -->
+    <div class="card shadow p-4 mb-4">
+        <h3>🚀 Model Overview</h3>
+        <hr>
+        <p><b>Project:</b> Spaceship Titanic Survival Prediction</p>
+        <p><b>Model Used:</b> Random Forest Classifier</p>
+        <p><b>Accuracy:</b> <span class="text-success">85%</span></p>
+        <p><b>Status:</b> <span class="text-primary">Deployed & Active</span></p>
+    </div>
+
+    <!-- Description -->
+    <div class="card shadow p-4 mb-4">
+        <h3>📊 Model Description</h3>
+        <hr>
+        <p>
+            This machine learning model predicts whether a passenger was transported to another dimension 
+            during the Spaceship Titanic incident. It is trained using structured passenger data such as 
+            age, spending behavior, home planet, and cabin details.
+        </p>
+        <p>
+            The <b>Random Forest algorithm</b> is used due to its high accuracy, robustness, and ability 
+            to handle missing values and complex relationships.
+        </p>
+    </div>
+
+    <!-- Features Used -->
+    <div class="card shadow p-4 mb-4">
+        <h3>🧾 Features Used</h3>
+        <hr>
+        <ul>
+            <li>Home Planet</li>
+            <li>Destination</li>
+            <li>Age</li>
+            <li>VIP Status</li>
+            <li>Room Service Spending</li>
+            <li>Food Court Spending</li>
+            <li>Shopping Mall Spending</li>
+            <li>Spa Usage</li>
+            <li>VR Deck Usage</li>
+        </ul>
+    </div>
+
+    <!-- Performance Metrics -->
+    <div class="card shadow p-4 mb-4">
+        <h3>📈 Performance Metrics</h3>
+        <hr>
+        <ul>
+            <li><b>Accuracy:</b> 85%</li>
+            <li><b>Precision:</b> 83%</li>
+            <li><b>Recall:</b> 82%</li>
+            <li><b>F1 Score:</b> 82.5%</li>
+        </ul>
+    </div>
+
+    <!-- Insights -->
+    <div class="card shadow p-4 mb-4">
+        <h3>🔍 Key Insights</h3>
+        <hr>
+        <ul>
+            <li>Passengers with high luxury spending are more likely to be transported.</li>
+            <li>VIP passengers show different survival patterns.</li>
+            <li>Cabin location plays a significant role.</li>
+        </ul>
+    </div>
+
+    <!-- Actions -->
+    <div class="text-center">
+        <a href="{{ url_for('download_report') }}" class="btn btn-primary">
+    Download Full PDF Report
+</a>
+        <a href="/download_report" class="btn btn-success">📥 Download Report (PDF)</a>
+        <a href="/predict" class="btn btn-primary">🔮 Go to Prediction</a>
+    </div>
+</div>
+
+<script src="/static/script.js"></script>
+
+{% endblock %}

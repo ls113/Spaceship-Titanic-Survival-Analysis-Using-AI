@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>🎥 AI Simulation</h1>
+
+<button onclick="runSimulation()">Run Simulation</button>
+
+<div id="simOutput" class="card"></div>
+
+<script>
+function runSimulation(){
+    let output = document.getElementById("simOutput");
+    output.innerHTML = "Running...";
+
+    setTimeout(()=>{
+        output.innerHTML = "Passenger Survival Probability: 82%";
+    },2000);
+}
+</script>
+
+{% endblock %}

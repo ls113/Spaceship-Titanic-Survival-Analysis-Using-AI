@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+    .matrix-table {
+        table-layout: fixed;
+        height: 350px;
+        border-collapse: separate;
+        border-spacing: 5px; /* Adds a small gap between cells */
+    }
+    .matrix-header {
+        background-color: #f8f9fa !important;
+        color: #495057;
+        font-weight: 600;
+        font-size: 0.9rem;
+    }
+    .matrix-cell {
+        transition: transform 0.2s;
+    }
+    .matrix-cell:hover {
+        transform: scale(1.03);
+        z-index: 5;
+    }
+</style>
+
+<div class="container mt-5">
+    <div class="text-center mb-5">
+        <h1 class="display-4 text-dark">📉 Confusion Matrix</h1>
+        <p class="text-secondary">Detailed breakdown of Model Predictions vs. Actual Transported Status.</p>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow-lg border-0 mb-5">
+                <div class="card-body p-4">
+                    <table class="table table-bordered text-center align-middle m-0 matrix-table">
+                        <thead>
+                            <tr>
+                                <th style="border: none; background: transparent;"></th>
+                                <th class="matrix-header">Predicted: NO</th>
+                                <th class="matrix-header">Predicted: YES</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th class="matrix-header">Actual: NO</th>
+                                <td class="bg-success text-white matrix-cell">
+                                    <h2 class="fw-bold mb-0">{{ metrics.tn|default(0) }}</h2>
+                                    <small class="text-uppercase">True Negative</small>
+                                </td>
+                                <td class="bg-danger text-white matrix-cell">
+                                    <h2 class="fw-bold mb-0">{{ metrics.fp|default(0) }}</h2>
+                                    <small class="text-uppercase">False Positive</small>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="matrix-header">Actual: YES</th>
+                                <td class="bg-warning text-dark matrix-cell">
+                                    <h2 class="fw-bold mb-0">{{ metrics.fn|default(0) }}</h2>
+                                    <small class="text-uppercase">False Negative</small>
+                                </td>
+                                <td class="bg-primary text-white matrix-cell">
+                                    <h2 class="fw-bold mb-0">{{ metrics.tp|default(0) }}</h2>
+                                    <small class="text-uppercase">True Positive</small>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="row text-center g-3">
+                <div class="col-md-4">
+                    <div class="card p-3 shadow-sm border-0 border-top border-primary border-4">
+                        <h6 class="text-muted mb-1">Precision</h6>
+                        <h3 class="text-primary mb-0">{{ metrics.precision|default('0.00') }}</h3>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card p-3 shadow-sm border-0 border-top border-success border-4">
+                        <h6 class="text-muted mb-1">Recall</h6>
+                        <h3 class="text-success mb-0">{{ metrics.recall|default('0.00') }}</h3>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card p-3 shadow-sm border-0 border-top border-info border-4">
+                        <h6 class="text-muted mb-1">Accuracy</h6>
+                        <h3 class="text-info mb-0">{{ metrics.accuracy|default('0.00') }}</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

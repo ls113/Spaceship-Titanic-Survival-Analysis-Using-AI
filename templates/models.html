@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container mt-5">
+    <div class="text-center mb-5">
+        <h1 class="display-4">🤖 Model Intelligence Lab</h1>
+        <p class="text-muted">Comparing performance metrics for the Spaceship Titanic classification task.</p>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <div class="card shadow-sm border-primary h-100">
+                <div class="card-body">
+                    <h3 class="card-title text-primary">Random Forest Classifier</h3>
+                    <p class="card-text">Our primary model. Excellent at handling non-linear relationships in passenger spending and cabin data.</p>
+                    <div class="mt-4">
+                        <div class="d-flex justify-content-between mb-1">
+                            <span>Accuracy</span>
+                            <span class="fw-bold">85%</span>
+                        </div>
+                        <div class="progress" style="height: 10px;">
+                            <div class="progress-bar bg-success" role="progressbar" style="width: 85%"></div>
+                        </div>
+                    </div>
+                    <ul class="mt-3 small text-muted">
+                        <li>High robustness to outliers</li>
+                        <li>Built-in feature importance</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 mb-4">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <h3 class="card-title text-secondary">Logistic Regression</h3>
+                    <p class="card-text">Used as a baseline model to establish a statistical foundation for survival probability.</p>
+                    <div class="mt-4">
+                        <div class="d-flex justify-content-between mb-1">
+                            <span>Accuracy</span>
+                            <span class="fw-bold">78%</span>
+                        </div>
+                        <div class="progress" style="height: 10px;">
+                            <div class="progress-bar bg-info" role="progressbar" style="width: 78%"></div>
+                        </div>
+                    </div>
+                    <ul class="mt-3 small text-muted">
+                        <li>Fast training time</li>
+                        <li>High interpretability</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

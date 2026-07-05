@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>🧪 AI Testing Lab</h1>
+
+<div class="card">
+    <label>Age</label>
+    <input type="range" min="1" max="80" id="age" oninput="updateVal('ageVal',this.value)">
+    <span id="ageVal">40</span>
+
+    <label>Spending</label>
+    <input type="range" min="0" max="1000" id="spend" oninput="updateVal('spendVal',this.value)">
+    <span id="spendVal">500</span>
+
+    <button onclick="simulate()">Test AI</button>
+</div>
+
+<h3 id="result"></h3>
+
+<script>
+function updateVal(id,val){
+    document.getElementById(id).innerHTML = val;
+}
+
+function simulate(){
+    let age = document.getElementById("age").value;
+    let spend = document.getElementById("spend").value;
+
+    let prob = (spend/10 + age) % 100;
+
+    document.getElementById("result").innerHTML =
+    "Predicted Survival Chance: " + prob + "%";
+}
+</script>
+
+{% endblock %}

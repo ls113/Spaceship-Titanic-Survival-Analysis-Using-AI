@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1 style="text-align:center;">🧾 Prediction History</h1>
+
+<!-- Search + Download -->
+<div style="display:flex; justify-content:space-between; margin-bottom:15px;">
+
+    <input type="text" id="searchInput" placeholder="🔍 Search..."
+        style="padding:10px; width:250px; border-radius:8px; border:none; outline:none;">
+
+    <button onclick="downloadCSV()"
+        style="padding:10px 15px; border:none; border-radius:8px; background:#00c853; color:white; cursor:pointer;">
+        📥 Download CSV
+    </button>
+
+</div>
+
+<!-- HISTORY CONTAINER -->
+<div class="history-container">
+
+{% if history and history|length > 0 %}
+
+<table class="history-table" id="historyTable">
+
+<thead>
+<tr>
+    <th>Age</th>
+    <th>Spending</th>
+    <th>Prediction</th>
+    <th>Confidence</th>
+    <th>Time</th>
+</tr>
+</thead>
+
+<tbody>
+{% for item in history %}
+<tr>
+    <td>{{ item.age }}</td>
+    <td>{{ item.spending }}</td>
+    <td>{{ item.prediction }}</td>
+    <td>{{ item.confidence }}</td>
+    <td>{{ item.time }}</td>
+</tr>
+{% endfor %}
+</tbody>
+
+</table>
+
+{% else %}
+
+<div style="text-align:center; padding:40px;">
+    <h2>🚫 No Predictions Yet</h2>
+    <p>Go to Predict Page and generate results.</p>
+</div>
+
+{% endif %}
+
+</div>
+
+<!-- SCRIPT -->
+<script>
+
+// 🔍 SEARCH FILTER
+document.getElementById("searchInput").addEventListener("keyup", function() {
+    let filter = this.value.toLowerCase();
+    let rows = document.querySelectorAll("#historyTable tbody tr");
+
+    rows.forEach(row => {
+        let text = row.innerText.toLowerCase();
+        row.style.display = text.includes(filter) ? "" : "none";
+    });
+});
+
+// 📥 DOWNLOAD CSV
+function downloadCSV() {
+    let table = document.getElementById("historyTable");
+    let rows = table.querySelectorAll("tr");
+
+    let csv = [];
+
+    rows.forEach(row => {
+        let cols = row.querySelectorAll("td, th");
+        let rowData = [];
+        cols.forEach(col => rowData.push(col.innerText));
+        csv.push(rowData.join(","));
+    });
+
+    let csvFile = new Blob([csv.join("\n")], { type: "text/csv" });
+    let downloadLink = document.createElement("a");
+
+    downloadLink.download = "prediction_history.csv";
+    downloadLink.href = window.URL.createObjectURL(csvFile);
+    downloadLink.style.display = "none";
+
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+}
+
+</script>
+
+{% endblock %}

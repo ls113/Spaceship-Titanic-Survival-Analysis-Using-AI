@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="hero">
+    <h1>🚀 Spaceship Titanic AI</h1>
+    <p>Ultimate Industry-Level AI Prediction System</p>
+
+    <canvas id="resultChart"></canvas>
+
+    <button onclick="location.href='/predict-page'" class="btn-glow">
+        Start Prediction
+    </button>
+    <button onclick="startVoice()">🎤 Speak</button>
+</div>
+
+{% endblock %}

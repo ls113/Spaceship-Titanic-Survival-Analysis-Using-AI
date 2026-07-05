@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>📡 API Dashboard</h1>
+
+<div class="card">
+    <h3>Endpoint</h3>
+    <code>/predict_api</code>
+</div>
+
+<div class="card">
+    <h3>Request JSON</h3>
+<pre>
+{
+ "Age": 25,
+ "RoomService": 100,
+ "FoodCourt": 200
+}
+</pre>
+</div>
+
+<div class="card">
+    <h3>Response</h3>
+<pre>
+{
+ "prediction": 1
+}
+</pre>
+</div>
+
+<button onclick="testAPI()">Test API</button>
+
+<p id="apiResult"></p>
+
+<script>
+function testAPI(){
+    fetch('/predict_api',{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({Age:25,RoomService:100,FoodCourt:200})
+    })
+    .then(res=>res.json())
+    .then(data=>{
+        document.getElementById("apiResult").innerHTML =
+        "Prediction: " + data.prediction;
+    });
+}
+</script>
+
+{% endblock %}

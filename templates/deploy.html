@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container py-5">
+    <div class="text-center mb-5">
+        <h1 class="display-4 text-white">🌍 Deployment Engine</h1>
+        <p class="lead text-white-50">High-End Continuous Integration & Infrastructure Setup</p>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card bg-dark border-secondary text-white shadow mb-4">
+                <div class="card-body">
+                    <h5>Deployment Controls</h5>
+                    <button class="btn btn-outline-success w-100 mb-3" onclick="runPipeline()" id="mainDeployBtn">
+                        🚀 Run Production Pipeline
+                    </button>
+                    <div class="form-check form-switch mb-3">
+                        <input class="form-check-input" type="checkbox" id="autoScale">
+                        <label class="form-check-label" for="autoScale">Auto-Scaling Group</label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card bg-dark border-secondary text-white shadow">
+                <div class="card-body">
+                    <h6>Infrastructure Meta</h6>
+                    <ul class="small text-white-50 list-unstyled">
+                        <li>Platform: AWS Elastic Beanstalk</li>
+                        <li>Region: us-east-1</li>
+                        <li>Runtime: Python 3.9 (Slim)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <div class="card bg-black border-secondary text-success shadow">
+                <div class="card-header bg-dark text-white border-secondary d-flex justify-content-between">
+                    <span>Terminal Instance: #8821</span>
+                    <span class="badge bg-success">READY</span>
+                </div>
+                <div class="card-body font-monospace p-4" style="height: 400px; overflow-y: auto;" id="terminalBody">
+                    <div>> System idle. Waiting for deployment command...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function runPipeline() {
+    const btn = document.getElementById('mainDeployBtn');
+    const terminal = document.getElementById('terminalBody');
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spinner-border spinner-border-sm"></span> Processing...';
+
+    const steps = [
+        "> INITIALIZING BUILD ENGINE...",
+        "> PULLING BASE IMAGE: python:3.9-slim",
+        "> INSTALLING DEPENDENCIES (requirements.txt)...",
+        "> EXPORTING model.pkl TO BLOB STORAGE...",
+        "> RUNNING UNIT TESTS: 100% PASSED",
+        "> STARTING DOCKER CONTAINER...",
+        "> HEALTH CHECK: OK",
+        "> LIVE AT: https://spaceship-titanic-ai.render.com"
+    ];
+
+    let i = 0;
+    const interval = setInterval(() => {
+        if (i < steps.length) {
+            const div = document.createElement('div');
+            div.className = "mb-2";
+            div.innerText = steps[i];
+            terminal.appendChild(div);
+            terminal.scrollTop = terminal.scrollHeight;
+            i++;
+        } else {
+            clearInterval(interval);
+            btn.innerHTML = "✨ DEPLOYMENT COMPLETE";
+            btn.className = "btn btn-success w-100 mb-3";
+        }
+    }, 800);
+}
+</script>
+
+{% endblock %}

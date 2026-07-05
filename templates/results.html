@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="results-wrapper">
+    <div class="glass-header">
+        <div class="header-actions">
+    <h1>Analysis History</h1>
+    <a href="{{ url_for('download_results') }}" class="btn-glow">
+        📥 Download CSV Report
+    </a>
+</div>
+        <div class="button-group">
+            <a href="/" class="btn btn-secondary">← Back</a>
+            <a href="/download_results" class="btn btn-primary">📥 Download CSV</a>
+        </div>
+    </div>
+
+    <div class="table-card">
+        <table class="results-table">
+            <thead>
+                <tr>
+                    <th>Time</th>
+                    <th>Age</th>
+                    <th>Result</th>
+                    <th>Confidence</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in history|reverse %}
+                <tr>
+                    <td>{{ item.time }}</td>
+                    <td>{{ item.age }}</td>
+                    <td>
+                        <span class="status-badge">{{ item.prediction }}</span>
+                    </td>
+                    <td class="confidence-val">{{ item.confidence }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<style>
+    .results-wrapper { padding: 40px 5%; max-width: 1100px; margin: auto; }
+
+    .glass-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: rgba(255, 255, 255, 0.03);
+        padding: 30px;
+        border-radius: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        margin-bottom: 30px;
+    }
+
+    .glow-title {
+        margin: 0;
+        background: linear-gradient(to right, #00ff88, #00f2fe);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    /* Table Styling */
+    .table-card {
+        background: rgba(255, 255, 255, 0.02);
+        backdrop-filter: blur(15px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 24px;
+        overflow: hidden;
+    }
+
+    .results-table { width: 100%; border-collapse: collapse; text-align: left; }
+    th { background: rgba(0, 255, 136, 0.1); color: #00f2fe; padding: 18px; font-size: 0.8rem; letter-spacing: 1px; }
+    td { padding: 15px 18px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+
+    .status-badge {
+        background: rgba(0, 255, 136, 0.15);
+        color: #00ff88;
+        padding: 5px 12px;
+        border-radius: 6px;
+        font-weight: 600;
+        border: 1px solid rgba(0, 255, 136, 0.3);
+    }
+
+    .confidence-val { color: #00f2fe; font-weight: bold; }
+
+    /* Buttons */
+    .btn { padding: 10px 22px; border-radius: 10px; text-decoration: none; font-weight: 600; transition: 0.3s; }
+    .btn-primary { background: #00ff88; color: #000; }
+    .btn-secondary { border: 1px solid #00ff88; color: #00ff88; margin-right: 10px; }
+    .btn:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0, 255, 136, 0.3); }
+</style>
+{% endblock %}

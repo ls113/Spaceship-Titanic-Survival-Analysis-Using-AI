@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="explorer-page">
+    
+    <header class="explorer-header">
+        <h1 class="glow-title">🌍 Intelligence Explorer</h1>
+        <p class="subtitle">Real-time data synchronization from <code>data.csv</code></p>
+    </header>
+
+    <main class="data-container">
+        <div class="glass-card">
+            <div class="card-header">
+                <h3>Dataset Records</h3>
+                <span class="badge">{{ data|length - 1 if data else 0 }} Entries Found</span>
+            </div>
+
+            <div class="table-overflow">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            {% if data %}
+                                {% for col in data[0] %}
+                                    <th>{{ col }}</th>
+                                {% endfor %}
+                            {% endif %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in data[1:] %}
+                        <tr>
+                            {% for cell in row %}
+                                <td>{{ cell }}</td>
+                            {% endfor %}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+</div>
+
+<style>
+    .explorer-page { padding: 40px 5%; max-width: 1400px; margin: auto; }
+    
+    .explorer-header { text-align: center; margin-bottom: 50px; }
+    .subtitle { color: rgba(255,255,255,0.6); font-size: 1rem; margin-top: -10px; }
+
+    /* Glassmorphism Card */
+    .glass-card {
+        background: rgba(255, 255, 255, 0.02);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 30px;
+        overflow: hidden;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    }
+
+    .card-header {
+        padding: 25px 30px;
+        background: rgba(255,255,255,0.03);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    .badge {
+        background: rgba(0, 255, 136, 0.2);
+        color: #00ff88;
+        padding: 5px 15px;
+        border-radius: 50px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        border: 1px solid rgba(0, 255, 136, 0.3);
+    }
+
+    /* Modern Table Styling */
+    .table-overflow { overflow-x: auto; }
+    .data-table { width: 100%; border-collapse: collapse; min-width: 600px; }
+
+    .data-table th {
+        padding: 20px;
+        text-align: left;
+        color: #00f2fe;
+        text-transform: uppercase;
+        font-size: 0.75rem;
+        letter-spacing: 2px;
+        background: rgba(0,0,0,0.2);
+    }
+
+    .data-table td {
+        padding: 18px 20px;
+        color: rgba(255,255,255,0.8);
+        border-bottom: 1px solid rgba(255,255,255,0.05);
+        font-size: 0.9rem;
+    }
+
+    .data-table tr:last-child td { border-bottom: none; }
+
+    .data-table tbody tr:hover {
+        background: rgba(255,255,255,0.03);
+        transition: 0.3s ease;
+    }
+
+    .data-table tbody tr:hover td { color: #fff; }
+</style>
+{% endblock %}

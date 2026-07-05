@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>⚙️ Settings</h1>
+
+<div class="card">
+    <h3>Select Model</h3>
+    <select class="form-control">
+        <option>Random Forest</option>
+        <option>XGBoost</option>
+        <option>Logistic Regression</option>
+    </select>
+</div>
+
+<div class="card">
+    <h3>Theme Mode</h3>
+    <button onclick="toggleTheme()">🌙 Toggle Dark Mode</button>
+</div>
+
+<div class="card">
+    <h3>Notifications</h3>
+    <label><input type="checkbox"> Enable Alerts</label>
+</div>
+
+{% endblock %}
